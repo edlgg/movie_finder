@@ -1,0 +1,6 @@
+*.pyc
+.vscode
+private.py
+src/private.py
+.vscode
+src/.vscode

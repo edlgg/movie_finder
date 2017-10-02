@@ -1,0 +1,91 @@
+http://image.tmdb.org/t/p/w185/nBNZadXqJSdt05SHLqgT0HuC5Gm.jpg
+/dcBHejOsKvzVZVozWJAPzYthb8X.jpg
+
+CREATE TABLE vote_averages(
+	id bigint primary key,
+    description text
+);
+
+CREATE TABLE directors(
+	movie_id bigint references movies(id) primary key,
+    name text,
+    image text
+);
+
+CREATE TABLE actors(
+	id bigint primary key,
+    name text,
+    image text
+);
+
+CREATE TABLE genres(
+	id bigint primary key,
+    name text
+);
+
+CREATE TABLE movies(
+	id bigint primary key,
+    revenue bigint,
+    title text,
+    release_date text,
+    backdrop_path text,
+    budget bigint,
+    vote_average bigint references vote_averages(id)
+);
+
+CREATE TABLE acts_in(
+    movie_id bigint references movies(id),
+	actor_id bigint references actors(id)
+   
+);
+
+CREATE TABLE is_about(
+    movie_id bigint references movies(id),
+	genre_id bigint references genres(id)
+);
+
+INSERT INTO vote_averages VALUES (0, 'Pesima');
+INSERT INTO vote_averages VALUES (1, 'Terrible');
+INSERT INTO vote_averages VALUES (2, 'Malisima');
+INSERT INTO vote_averages VALUES (3, 'Mala');
+INSERT INTO vote_averages VALUES (4, 'Buen intento pero le falta');
+INSERT INTO vote_averages VALUES (5, 'Meh');
+INSERT INTO vote_averages VALUES (6, 'No esta mal');
+INSERT INTO vote_averages VALUES (7, 'Buena');
+INSERT INTO vote_averages VALUES (8, 'Muy buena');
+INSERT INTO vote_averages VALUES (9, 'Excelente');
+INSERT INTO vote_averages VALUES (10, 'Perfecta');
+
+INSERT INTO genres VALUES (28, 'Acción');
+INSERT INTO genres VALUES (12, 'Aventura');
+INSERT INTO genres VALUES (16, 'Animación');
+INSERT INTO genres VALUES (35, 'Comedia');
+INSERT INTO genres VALUES (80, 'Crimen');
+INSERT INTO genres VALUES (99, 'Documental');
+INSERT INTO genres VALUES (18, 'Drama');
+INSERT INTO genres VALUES (10751, 'Familia');
+INSERT INTO genres VALUES (14, 'Fantasia');
+INSERT INTO genres VALUES (36, 'Historia');
+INSERT INTO genres VALUES (27, 'Horror');
+INSERT INTO genres VALUES (10402, 'Musical');
+INSERT INTO genres VALUES (9648, 'Misterio');
+INSERT INTO genres VALUES (10749, 'Romance');
+INSERT INTO genres VALUES (878, 'Ciencia Ficción');
+INSERT INTO genres VALUES (10770, 'Película de TV');
+INSERT INTO genres VALUES (53, 'Thriller');
+INSERT INTO genres VALUES (10752, 'Guerra');
+INSERT INTO genres VALUES (37, 'Western');
+
+
+
+
+//info
+movie = Movie(1,1000,"aaa","7-8-1995","dasdadasd.com",10000,10)
+SELECT * FROM `msgtable` WHERE `cdate`='18/07/2012' LIMIT 10 OFFSET 10
+
+
+
+
+
+
+

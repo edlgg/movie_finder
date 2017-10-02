@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Películas</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/4-col-portfolio.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/stylecss')}}">
+
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"/>
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/js/bootstrap.js"></script>
+   
+    <script type=text/javascript>
+
+    
+
+        $(document).ready(function(){
+
+            var actors = {{ actors }};
+
+            $('#actor').autocomplete({
+                source: actors
+            });
+        });
+
+        $(document).ready(function(){
+            
+             var directors = {{ directors }};
+            
+                $('#director').autocomplete({
+                    source: directors
+                });
+        });
+
+    </script>
+    
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Películas</a>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+
+        <!-- Jumbotron Header -->
+        <header class="jumbotron my-4">
+            <h1 class="display-3">Bienvenido!</h1>
+            <p class="lead">Encuentra alguna pelicula.</p>
+            <form role="form" method ="POST">
+            
+            <div class="form-group">
+                    <label for="actor">Actor:	</label>
+                <input type="text" name="actor" id="actor" name="actor" class="form-control input-sm" placeholder="Samuel L. Jackson">
+            </div>
+            <div class="form-group">
+                    <label for="actor">Director:	</label>
+                <input type="text" name="director" id="director" name="actor" class="form-control input-sm" placeholder="Quentin Tarantino">
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                            <label for="genre">genre:	</label>
+                            <select class="form-control input-sm" id="genre" name="genre">
+                                    <option>-- Genero --</option>
+                                    {% for genre in genres%}
+                                        <option>{{ genre.name }}</option>
+                                    {% endfor %}
+                            </select>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="form-group">
+                            <label for="sort-by">Ordenar por:	</label>
+                            <select class="form-control input-sm" id="sort-by" name="sort-by">
+                                    <option>Votos</option>
+                                    <option>Presupuesto</option>
+                                    <option>Ingresos</option>
+                                      </select>
+                    </div>
+                </div>
+            </div>
+
+            <input type="submit" value="Buscar" class="btn btn-primary btn-block">
+
+            </form>
+        </header>
+
+        <div class="row">
+
+            {% if movies%}
+            {% for movie in movies%}
+            <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="{{ url_for('pelicula', id=movie.id) }}"><img class="card-img-top" src="http://image.tmdb.org/t/p/w185/{{ movie.backdrop_path }}" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="{{ url_for('pelicula', id=movie.id) }}">{{ movie.title }}</a>
+
+                        </h4>
+                        <p>Vote Average: {{movie.vote_average }} <br /> Budget: $ {{movie.budget}}<br /> Revenue: $ {{ movie.revenue
+                            }}<br /> Release data: {{movie.release_date}}</p>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {%else%}
+            <h3>No hay ninguna pelicula con esas descripciones</h3>
+            {% endif %}
+
+
+
+        </div>
+        <!-- /.row -->
+
+        <!-- Pagination -->
+        <!-- <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+            </li>
+        </ul> -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <!-- <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p> -->
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/popper/popper.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
