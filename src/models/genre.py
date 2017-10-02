@@ -11,7 +11,7 @@ class Genre:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("INSERT INTO genres (id, name) VALUES (%s, %s)",(self.id, self.name))
+            cursor.execute("INSERT INTO genres (id, name) VALUES (%s, %s) on conflict do nothing",(self.id, self.name))
 
     @classmethod
     def load_by_id(cls, id):

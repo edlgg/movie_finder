@@ -1,6 +1,7 @@
 from common.database import Database, CursorFromConnectionFromPool
 import json
 from flask import jsonify
+import tmdbsimple as tmdb
 
 class Movie:
     def __init__(self, id, revenue, title, release_date, backdrop_path, budget, vote_average):
@@ -17,7 +18,7 @@ class Movie:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("INSERT INTO movies (id, revenue, title, release_date, backdrop_path, budget, vote_average) VALUES (%s, %s, %s, %s, %s, %s, %s)",(self.id, self.revenue, self.title, self.release_date, self.backdrop_path, self.budget, self.vote_average))
+            cursor.execute("INSERT INTO movies (id, revenue, title, release_date, backdrop_path, budget, vote_average) VALUES (%s, %s, %s, %s, %s, %s, %s) on conflict do nothing",(self.id, self.revenue, self.title, self.release_date, self.backdrop_path, self.budget, self.vote_average))
 
     @classmethod
     def load_by_id(cls, id):
@@ -37,6 +38,8 @@ class Movie:
                 'budget': self.budget,
                 'vote_average': self.vote_average
              }
+    
+
 
 class Movies:
     def __init__(self):
@@ -83,14 +86,15 @@ class Movies:
                         new_movie = Movie(movie[0],movie[1],movie[2],movie[3],movie[4],movie[5],movie[6])
                         movies.append(new_movie.json())
                     return movies
-
-"""
-Christopher Nolan directors
-
-Mark Boone Junior movies
-
-Action genres
-
-
-
-"""
+    
+    @classmethod
+    def create_movies(cls):
+        tmdb.API_KEY = 'f1a02539ea044b6d67a19c6bb2025b94'
+        for i in range(1,26,1):
+            discover = tmdb.Discover()
+            response = discover.movie(page=i, sort_by='popularity.desc')
+            for s in discover.results:
+                movie = tmdb.Movies(s['id'])
+                response = movie.info()
+                moviee = Movie(movie.id, movie.revenue, movie.title, movie.release_date, movie.backdrop_path, movie.budget, movie.vote_average)
+                moviee.save_to_db()

@@ -13,7 +13,7 @@ from private import USER, PASSWORD, HOST, DATABASE, SECRET_KEY
 __author__ = "edlgg"
 
 app = Flask(__name__)
-app.config.from_object('src.config')
+#app.config.from_object('src.config')
 app.secret_key = SECRET_KEY
 
 Database.initialize(minconn=1, maxconn=10, user=USER, password=PASSWORD, host=HOST, database=DATABASE)

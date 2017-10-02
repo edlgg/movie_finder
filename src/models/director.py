@@ -11,7 +11,7 @@ class Director:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("INSERT INTO directors (movie_id, name, image) VALUES (%s, %s, %s)",(self.movie_id, self.name, self.image))
+            cursor.execute("INSERT INTO directors (movie_id, name, image) VALUES (%s, %s, %s) on conflict do nothing",(self.movie_id, self.name, self.image))
 
     @classmethod
     def find_by_movie_id(cls, movie_id):

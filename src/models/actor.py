@@ -11,7 +11,7 @@ class Actor:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("INSERT INTO actors (id, name, image) VALUES (%s, %s, %s)",(self.id, self.name, self.image))
+            cursor.execute("INSERT INTO actors (id, name, image) VALUES (%s, %s, %s) on conflict do nothing",(self.id, self.name, self.image))
 
     @classmethod
     def load_by_id(cls, id):
@@ -67,5 +67,7 @@ class Actors:
                     actors.append(class_actor)
 
             return actors
+
+    
 
 

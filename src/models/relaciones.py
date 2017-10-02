@@ -13,7 +13,7 @@ class Movie_Genre:
 
     def save_to_db(self):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("INSERT INTO is_about (movie_id, genre_id) VALUES (%s, %s)",(self.movie_id, self.genre_id))
+            cursor.execute("INSERT INTO is_about (movie_id, genre_id) VALUES (%s, %s) on conflict do nothing",(self.movie_id, self.genre_id))
 
     @classmethod
     def load_by_movie_id(cls, movie_id):
@@ -36,6 +36,7 @@ class Movie_Genre:
                 'movie_id': self.movie_id,
                 'genre_id': self.name,
              }
+
 
 class Movie_Actors:
     def __init__(self, movie_id, actor_id):
