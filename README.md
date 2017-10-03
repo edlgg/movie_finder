@@ -4,7 +4,7 @@ This aplication is used to find movies based on certain criterias like actors, d
 
 Technology stack: PostgreSQL, Python (Flask & Jinja2), HTML/CSS/Bootstrap, jQuery, theMovieDB API.
 
-You can access the website at https://discount-tracker-website-edlgg.herokuapp.com
+You can access the website at:
 
 
 ![Home Screen](readme-files/home.png)
