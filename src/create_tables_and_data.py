@@ -4,9 +4,11 @@ from models.actor import Actor, Actors
 from models.director import Director
 from models.relaciones import Movie_Actors, Movie_Genre
 import tmdbsimple as tmdb
+from private import MDB_API_KEY
 
 Database.initialize(minconn=1, maxconn=10, user="postgres", password="6627", host="localhost", database="peliculas2")
-tmdb.API_KEY = 'f1a02539ea044b6d67a19c6bb2025b94'
+
+tmdb.API_KEY = MDB_API_KEY
 
 def create_actors_acts_in_and_directors():
     movies = Movies.load_all()
