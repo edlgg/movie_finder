@@ -22,7 +22,7 @@ class Database:
     @classmethod
     def create_tables(cls):
         with CursorFromConnectionFromPool() as cursor:
-                cursor.execute("""CREATE TABLE vote_averages(
+                cursor.execute("""CREATE TABLE IF NOT EXISTS vote_averages(
                                 id bigint primary key,
                                 description text
                             );

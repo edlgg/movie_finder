@@ -38,7 +38,7 @@ def create_is_about():
                 relation.save_to_db()
 
 
-#Database.create_tables() #Creates databases; populate genres and vote_averages
-#Movies.create_movies()
-#create_actors_acts_in_and_directors()
+Database.create_tables() #Creates databases; populate genres and vote_averages
+Movies.create_movies()
+create_actors_acts_in_and_directors()
 create_is_about()
