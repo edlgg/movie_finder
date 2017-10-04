@@ -1,13 +1,13 @@
 from flask import Flask, render_template, session, redirect, request, url_for, g, jsonify
-from common.database import Database
-from models.enchilada import Enchilada
+from src.common.database import Database
+from src.models.enchilada import Enchilada
 import requests
-from models.movie import Movies
+from src.models.movie import Movies
 import json
-from models.vote_average import Vote_average
-from models.actor import Actor, Actors
-from models.director import Director, Directors
-from models.genre import Genre
+from src.models.vote_average import Vote_average
+from src.models.actor import Actor, Actors
+from src.models.director import Director, Directors
+from src.models.genre import Genre
 import os
 
 __author__ = "edlgg"
