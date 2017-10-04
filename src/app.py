@@ -59,4 +59,5 @@ def pelicula(id):
     
     return render_template("pelicula.jinja2", enchilada = enchilada, description = description)
 
-app.run(port=4995, debug=True)
+if __name__ == '__main__':
+    app.run(port=4995, debug=True)
