@@ -8,15 +8,15 @@ from models.vote_average import Vote_average
 from models.actor import Actor, Actors
 from models.director import Director, Directors
 from models.genre import Genre
-from private import USER, PASSWORD, HOST, DATABASE, SECRET_KEY
+import os
 
 __author__ = "edlgg"
 
 app = Flask(__name__)
-#app.config.from_object('src.config')
-app.secret_key = SECRET_KEY
+app.config.from_object('src.config')
+app.secret_key = os.environ.get("SECRET_KEY")
 
-Database.initialize(minconn=1, maxconn=10, user=USER, password=PASSWORD, host=HOST, database=DATABASE)
+Database.initialize(minconn=1, maxconn=10, user=os.environ.get("USER"), password=os.environ.get("PASSWORD"), host=os.environ.get("HOST"), database=os.environ.get("DATABASE"))
 
 @app.route('/',methods=['GET', 'POST'])
 def homepage():

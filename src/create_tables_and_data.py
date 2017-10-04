@@ -6,7 +6,9 @@ from models.relaciones import Movie_Actors, Movie_Genre
 import tmdbsimple as tmdb
 from private import MDB_API_KEY
 
-Database.initialize(minconn=1, maxconn=10, user="postgres", password="6627", host="localhost", database="peliculas2")
+#Database.initialize(minconn=1, maxconn=10, user="postgres", password="", host="localhost", database="peliculas2")
+Database.initialize(minconn=1, maxconn=10, user=os.environ.get("USER"), password=os.environ.get("PASSWORD"), host=os.environ.get("HOST"), database=os.environ.get("DATABASE"))
+
 
 tmdb.API_KEY = MDB_API_KEY
 
@@ -40,7 +42,7 @@ def create_is_about():
                 relation.save_to_db()
 
 
-Database.create_tables() #Creates databases; populate genres and vote_averages
-Movies.create_movies()
-create_actors_acts_in_and_directors()
+#Database.create_tables() #Creates databases; populate genres and vote_averages
+#Movies.create_movies()
+#create_actors_acts_in_and_directors()
 create_is_about()
