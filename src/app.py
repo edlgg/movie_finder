@@ -1,5 +1,5 @@
 from flask import Flask, render_template, session, redirect, request, url_for, g, jsonify
-from common.database import Database
+from src.common.database import Database
 from models.enchilada import Enchilada
 import requests
 from models.movie import Movies
