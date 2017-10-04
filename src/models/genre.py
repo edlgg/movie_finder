@@ -44,7 +44,7 @@ class Genre:
     @classmethod
     def load_all(cls):
         with CursorFromConnectionFromPool() as cursor:
-            cursor.execute("SELECT * FROM genres order by name desc")
+            cursor.execute("SELECT * FROM genres order by name")
             genres_data = cursor.fetchall()
             if genres_data:
                 genres = []
