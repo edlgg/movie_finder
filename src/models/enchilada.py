@@ -1,7 +1,7 @@
-from models.movie import Movie
-from models.director import Director
-from models.actor import Actors, Actor
-from models.genre import Genre
+from src.models.movie import Movie
+from src.models.director import Director
+from src.models.actor import Actors, Actor
+from src.models.genre import Genre
 
 class Enchilada:
     def __init__(self, movie_id):

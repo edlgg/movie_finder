@@ -1,4 +1,4 @@
-from common.database import Database, CursorFromConnectionFromPool
+from src.common.database import Database, CursorFromConnectionFromPool
 
 class Actor:
     def __init__(self, id, name, image):

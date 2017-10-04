@@ -1,4 +1,4 @@
-from common.database import Database, CursorFromConnectionFromPool
+from src.common.database import Database, CursorFromConnectionFromPool
 
 class Director:
     def __init__(self, movie_id, name, image):
