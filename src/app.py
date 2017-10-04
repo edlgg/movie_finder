@@ -16,7 +16,10 @@ app = Flask(__name__)
 app.config.from_object('src.config')
 app.secret_key = os.environ.get("SECRET_KEY")
 
-Database.initialize(minconn=1, maxconn=10, user=os.environ.get("USER"), password=os.environ.get("PASSWORD"), host=os.environ.get("HOST"), database=os.environ.get("DATABASE"))
+
+@app.before_first_request
+def init_db():
+	Database.initialize(minconn=1, maxconn=10, user=os.environ.get("USER"), password=os.environ.get("PASSWORD"), host=os.environ.get("HOST"), database=os.environ.get("DATABASE"))
 
 @app.route('/',methods=['GET', 'POST'])
 def homepage():
